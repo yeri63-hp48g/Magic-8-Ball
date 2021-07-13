@@ -1,0 +1,92 @@
+'Ball'
+<<
+  @ Define custom menu.
+  { { "Look" << CONT >> } 
+    { } { } { } { } 
+    { "Quit" << CLEAR 0 MENU KILL >> } } TMENU
+
+  CCLCD
+  "         Magic" 3 DISP
+  "         8 Ball" 5 DISP
+
+  WHILE 1 REPEAT
+    @ Pause to continue (look) or quit.
+    3 FREEZE
+    "" PROMPT
+
+    @ Display countdown timer from 3 to 1,
+    @ with ticking sound.
+    CLLCD 
+    3 1 FOR t
+      "           " t + 4 DISP
+      100 .05 BEEP
+      1 WAIT
+      -1 STEP
+
+    Display random phrase.
+    0 RDZ 
+    "            " 6 DISP
+    { "
+               It is
+              certain!"
+      "         It is
+             decidedly
+                so."
+      "
+              Without
+              a doubt."
+      "
+               Yes,
+            definitely."
+      "        You may
+              rely on
+                it."
+      "
+               As I
+              see it."
+      "
+               Most
+              likely."
+      "
+              Outlook
+               good."
+      "
+               Yes."
+      "
+            Signs point
+              to yes."
+      "
+           Reply hazy,
+            try again."
+      "        Ask me
+              again
+              later."
+      "      Better not
+             tell you
+               now."
+      "        Cannot
+              predict
+               now."
+      "
+            Concentrate
+          and ask again."
+      "
+            Don't count
+              on it."
+      "
+             My reply
+              is no."
+      "
+            My sources
+              say no."
+      "
+            Outlook not
+             so good."
+      "
+               Very
+             doubtful." } 
+
+    RAND 20 * 1 + FLOOR GET 3 DISP
+    400 .5 BEEP
+  END
+>>
