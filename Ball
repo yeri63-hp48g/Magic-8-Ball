@@ -5,11 +5,11 @@
     { } { } { } { } 
     { "Quit" << CLEAR 0 MENU KILL >> } } TMENU
 
-  CCLCD
-  "         Magic" 3 DISP
-  "         8 Ball" 5 DISP
-
   WHILE 1 REPEAT
+    CCLCD
+    "         Magic" 3 DISP
+    "         8 Ball" 5 DISP
+
     @ Pause to continue (look) or quit.
     3 FREEZE
     "" PROMPT
@@ -88,5 +88,8 @@
 
     RAND 20 * 1 + FLOOR GET 3 DISP
     400 .5 BEEP
+    
+    @ Delay 2 seconds before clearing message.
+    2 WAIT
   END
 >>
