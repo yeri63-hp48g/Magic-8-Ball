@@ -1,95 +1,87 @@
 'Ball'
 <<
   @ Define custom menu.
-  { { "Look" << CONT >> } 
-    { } { } { } { } 
+  { { "Look" } { } { } { } { } 
     { "Quit" << CLEAR 0 MENU KILL >> } } TMENU
 
-  WHILE 1 REPEAT
-    CCLCD
-    "         Magic" 3 DISP
-    "         8 Ball" 5 DISP
-
-    @ Pause to continue (look) or quit.
-    3 FREEZE
-    "" PROMPT
-
-    @ Display countdown timer from 3 to 1,
-    @ with ticking sound.
-    CLLCD 
-    3 1 FOR t
-      "           " t + 4 DISP
-      100 .05 BEEP
-      1 WAIT
-      -1 STEP
-
-    Display random phrase.
-    0 RDZ 
-    "            " 6 DISP
-    { "
-               It is
+  CCLCD
+  1 FREEZE
+  "        Magic" 3 DISP .5 WAIT
+  "        8 Ball" 5 DISP 1.5 WAIT
+  CCLCD
+  "        Ready." 4 DISP
+  
+  WHILE 1
+    REPEAT
+    
+    @ Initialize variables.
+    @ k = keypress
+    
+    0 -> k 
+    <<
+      @ Wait for a valid keypress.
+      DO
+        -1 WAIT 'k' STO
+              
+        IF k 16.1 == THEN
+          CLEAR 2.01 MENU KILL
+        END
+      
+      UNTIL k 11.1 == END
+    >>
+    
+    @ Re-seed random function.
+    0 RDZ
+    
+    CLLCD
+    @ Display random response.
+    { "        It is
               certain!"
-      "         It is
+      "        It is
              decidedly
                 so."
-      "
-              Without
+      "       Without
               a doubt."
-      "
-               Yes,
+      "         Yes,
             definitely."
-      "        You may
+      "       You may
               rely on
                 it."
-      "
-               As I
+      "        As I
               see it."
-      "
-               Most
+      "        Most
               likely."
-      "
-              Outlook
+      "       Outlook
                good."
       "
                Yes."
-      "
-            Signs point
+      "     Signs point
               to yes."
-      "
-           Reply hazy,
+      "     Reply hazy,
             try again."
-      "        Ask me
+      "       Ask me
               again
               later."
-      "      Better not
+      "     Better not
              tell you
                now."
       "        Cannot
               predict
                now."
-      "
-            Concentrate
+      "    Concentrate
           and ask again."
-      "
-            Don't count
+      "    Don't count
               on it."
-      "
-             My reply
+      "      My reply
               is no."
-      "
-            My sources
+      "     My sources
               say no."
-      "
-            Outlook not
+      "    Outlook not
              so good."
-      "
-               Very
-             doubtful." } 
+      "       Very
+            doubtful." } 
 
     RAND 20 * 1 + FLOOR GET 3 DISP
     400 .5 BEEP
-
-    @ Delay 2 seconds before clearing message.
-    2 WAIT
   END
 >>
